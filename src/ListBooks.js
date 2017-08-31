@@ -1,5 +1,5 @@
 import React from 'react'
-import SearchBooks from './SearchBooks'
+import { Link } from 'react-router-dom'
 import WantToRead from './WantToRead'
 import CurrentlyReading from './CurrentlyReading'
 import Read from './Read'
@@ -26,9 +26,6 @@ class ListBooks extends React.Component {
     return (
 
       <div>
-        {this.props.showSearchPage ? (
-            <SearchBooks searchQuery={this.state.query}/>
-        ) : (
           <div className="list-books">
             <div className="list-books-title">
               <h1>MyReads</h1>
@@ -41,10 +38,9 @@ class ListBooks extends React.Component {
               </div>
             </div>
             <div className="open-search">
-              <a onClick={() => this.setState({ showSearchPage: true })}>Add a book</a>
+              <Link to="/search">Add a book</Link>
             </div>
           </div>
-        )}
       </div>
     )
   }
