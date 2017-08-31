@@ -4,7 +4,21 @@ import './App.css'
 
 class SearchBooks extends React.Component {
 
+  state = {
+    query: '',
+    searchResults: []
+  }
+
+  updateQuery = (query) => {
+    this.setState({query: query})
+  }
+
+  clearQuery = () => {
+    this.setState({query: ''})
+  }
+
   render() {
+    console.log(this.state.query)
     return (
       <div className="search-books">
         <div className="search-books-bar">
@@ -21,7 +35,7 @@ class SearchBooks extends React.Component {
             <input
             type="text"
             placeholder="Search by title or author"
-            value={this.props.searchQuery}
+            value={this.state.query}
             onChange={(event) => this.updateQuery(event.target.value)}
             />
 

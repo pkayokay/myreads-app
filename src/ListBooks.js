@@ -10,18 +10,6 @@ class ListBooks extends React.Component {
   //   books: PropTypes.array.isRequired
   // }
 
-  state = {
-    query: ''
-  }
-
-  updateQuery = (query) => {
-    this.setState({query: query.trim()})
-  }
-
-  clearQuery = () => {
-    this.setState({query: ''})
-  }
-
   render() {
     return (
 
