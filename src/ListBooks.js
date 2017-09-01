@@ -1,6 +1,6 @@
 import React from 'react'
+import SelectForm from './SelectForm'
 import { Link } from 'react-router-dom'
-import './App.css'
 
 class ListBooks extends React.Component {
   // static propTypes = {
@@ -19,23 +19,17 @@ class ListBooks extends React.Component {
             <h2 className="bookshelf-title">Currently Reading</h2>
             <div className="bookshelf-books">
               <ol className="books-grid">
-              {this.props.books.filter( book => book.status === 'Currently Reading').map(i => (
-                <li key={i.title}>
+              {this.props.books.filter( book => book.status === 'currentlyReading').map(n => (
+                <li key={n.title}>
                   <div className="book">
                     <div className="book-top">
-                      <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${i.bookURL})`}}></div>
+                      <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${n.bookURL})`}}></div>
                       <div className="book-shelf-changer">
-                        <select>
-                          <option value="none" disabled>Move to...</option>
-                          <option value="currentlyReading">Currently Reading</option>
-                          <option value="wantToRead">Want to Read</option>
-                          <option value="read">Read</option>
-                          <option value="none">None</option>
-                        </select>
+                        <SelectForm value={n.status}/>
                       </div>
                     </div>
-                    <div className="book-title">{i.title}</div>
-                    <div className="book-authors">{i.author}</div>
+                    <div className="book-title">{n.title}</div>
+                    <div className="book-authors">{n.author}</div>
                   </div>
                 </li>
                 ))}
@@ -47,23 +41,17 @@ class ListBooks extends React.Component {
             <h2 className="bookshelf-title">Want To Read</h2>
             <div className="bookshelf-books">
               <ol className="books-grid">
-              {this.props.books.filter( book => book.status === 'Want To Read').map(i => (
-                <li key={i.title}>
+              {this.props.books.filter( book => book.status === 'wantToRead').map(n => (
+                <li key={n.title}>
                   <div className="book">
                     <div className="book-top">
-                      <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${i.bookURL})`}}></div>
+                      <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${n.bookURL})`}}></div>
                       <div className="book-shelf-changer">
-                        <select>
-                          <option value="none" disabled>Move to...</option>
-                          <option value="currentlyReading">Currently Reading</option>
-                          <option value="wantToRead">Want to Read</option>
-                          <option value="read">Read</option>
-                          <option value="none">None</option>
-                        </select>
+                        <SelectForm value={n.status}/>
                       </div>
                     </div>
-                    <div className="book-title">{i.title}</div>
-                    <div className="book-authors">{i.author}</div>
+                    <div className="book-title">{n.title}</div>
+                    <div className="book-authors">{n.author}</div>
                   </div>
                 </li>
                 ))}
@@ -75,23 +63,17 @@ class ListBooks extends React.Component {
             <h2 className="bookshelf-title">Want To Read</h2>
             <div className="bookshelf-books">
               <ol className="books-grid">
-              {this.props.books.filter( book => book.status === 'Read').map(i => (
-                <li key={i.title}>
+              {this.props.books.filter( book => book.status === 'read').map(n => (
+                <li key={n.title}>
                   <div className="book">
                     <div className="book-top">
-                      <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${i.bookURL})`}}></div>
+                      <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${n.bookURL})`}}></div>
                       <div className="book-shelf-changer">
-                        <select>
-                          <option value="none" disabled>Move to...</option>
-                          <option value="currentlyReading">Currently Reading</option>
-                          <option value="wantToRead">Want to Read</option>
-                          <option value="read">Read</option>
-                          <option value="none">None</option>
-                        </select>
+                        <SelectForm value={n.status}/>
                       </div>
                     </div>
-                    <div className="book-title">{i.title}</div>
-                    <div className="book-authors">{i.author}</div>
+                    <div className="book-title">{n.title}</div>
+                    <div className="book-authors">{n.author}</div>
                   </div>
                 </li>
                 ))}
