@@ -65,7 +65,6 @@ class BooksApp extends React.Component {
         <Route exact path="/" render={()=> (
           <ListBooks
            books={this.state.books}
-          //  showSearchPage={this.state.showSearchPage}
           />
         )}/>
         <Route path="/search" render={({history}) => (
