@@ -19,13 +19,16 @@ class ListBooks extends React.Component {
             <h2 className="bookshelf-title">Currently Reading</h2>
             <div className="bookshelf-books">
               <ol className="books-grid">
-              {this.props.books.filter( book => book.status === 'currentlyReading').map(n => (
+              {this.props.books.filter( book => book.shelf === 'currentlyReading').map(n => (
                 <li key={n.title}>
                   <div className="book">
                     <div className="book-top">
                       <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${n.bookURL})`}}></div>
                       <div className="book-shelf-changer">
-                        <SelectForm value={n.status}/>
+                        <SelectForm
+                        value={n.shelf}
+                        updateBook={this.props.updateBook}
+                        />
                       </div>
                     </div>
                     <div className="book-title">{n.title}</div>
@@ -41,13 +44,13 @@ class ListBooks extends React.Component {
             <h2 className="bookshelf-title">Want To Read</h2>
             <div className="bookshelf-books">
               <ol className="books-grid">
-              {this.props.books.filter( book => book.status === 'wantToRead').map(n => (
+              {this.props.books.filter( book => book.shelf === 'wantToRead').map(n => (
                 <li key={n.title}>
                   <div className="book">
                     <div className="book-top">
                       <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${n.bookURL})`}}></div>
                       <div className="book-shelf-changer">
-                        <SelectForm value={n.status}/>
+                        <SelectForm value={n.shelf}/>
                       </div>
                     </div>
                     <div className="book-title">{n.title}</div>
@@ -60,16 +63,16 @@ class ListBooks extends React.Component {
           </div>
         {/* Read */}
           <div className="bookshelf">
-            <h2 className="bookshelf-title">Want To Read</h2>
+            <h2 className="bookshelf-title">Read</h2>
             <div className="bookshelf-books">
               <ol className="books-grid">
-              {this.props.books.filter( book => book.status === 'read').map(n => (
+              {this.props.books.filter( book => book.shelf === 'read').map(n => (
                 <li key={n.title}>
                   <div className="book">
                     <div className="book-top">
                       <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${n.bookURL})`}}></div>
                       <div className="book-shelf-changer">
-                        <SelectForm value={n.status}/>
+                        <SelectForm value={n.shelf}/>
                       </div>
                     </div>
                     <div className="book-title">{n.title}</div>
