@@ -1,11 +1,8 @@
 import React from 'react'
-import SelectForm from './SelectForm'
+import BookShelf from './BookShelf'
 import { Link } from 'react-router-dom'
 
 class ListBooks extends React.Component {
-  // static propTypes = {
-  //   books: PropTypes.array.isRequired
-  // }
 
   render() {
     return (
@@ -14,6 +11,7 @@ class ListBooks extends React.Component {
           <h1>MyReads</h1>
         </div>
         <div className="list-books-content">
+<<<<<<< HEAD
         {/* Currently Reading */}
           <div className="bookshelf">
             <h2 className="bookshelf-title">Currently Reading</h2>
@@ -83,6 +81,23 @@ class ListBooks extends React.Component {
               </ol>
             </div>
           </div>
+=======
+          <BookShelf
+          key="currentlyReading"
+          sectionTitle="Currently Reading"
+          books={this.props.books.filter( book => book.shelf === "currentlyReading")}
+          />
+          <BookShelf
+          key="wantToRead"
+          sectionTitle="Want To Read"
+          books={this.props.books.filter( book => book.shelf === "wantToRead")}
+          />
+          <BookShelf
+          key="read"
+          sectionTitle="Read"
+          books={this.props.books.filter( book => book.shelf === "read")}
+          />
+>>>>>>> origin/master
         </div>
         <div className="open-search">
           <Link to="/search">Add a book</Link>
