@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 class BookShelf extends React.Component {
   state = {};
@@ -34,6 +35,11 @@ class BookShelf extends React.Component {
       </div>
     );
   }
+}
+
+BookShelf.propTypes = {
+  books: PropTypes.array,
+  sectionTitle: PropTypes.string
 }
 
 export default BookShelf

@@ -1,5 +1,6 @@
 import React from 'react'
 import BookShelf from './BookShelf'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import * as BooksAPI from "./BooksAPI";
 
@@ -49,6 +50,11 @@ class ListBooks extends React.Component {
       </div>
     )
   }
+}
+
+
+ListBooks.propTypes = {
+  books: PropTypes.array
 }
 
 export default ListBooks
