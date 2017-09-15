@@ -8,28 +8,28 @@ import './App.css'
 class BooksApp extends React.Component {
   state = {
     books: []
-  };
+  }
 
   handleChange = (book: any, shelf: string) => {
     BooksAPI.update(book, shelf).then(response => {
       this.getBooks();
-    });
-  };
+    })
+  }
 
   getBooks() {
     BooksAPI.getAll().then(data => {
       this.setState({
         books: data
-      });
-    });
+      })
+    })
   }
 
   componentDidMount() {
     BooksAPI.getAll().then(data => {
       this.setState({
         books: data
-      });
-    });
+      })
+    })
   }
 
   render() {

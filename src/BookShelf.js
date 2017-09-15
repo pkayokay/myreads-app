@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 class BookShelf extends React.Component {
-  state = {};
+  state = {}
 
   render() {
     return (

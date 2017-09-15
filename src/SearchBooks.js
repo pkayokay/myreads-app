@@ -1,16 +1,21 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import * as BooksAPI from './BooksAPI'
 import './App.css'
 
 class SearchBooks extends React.Component {
 
   state = {
     query: '',
-    searchResults: []
+    books: []
   }
 
   updateQuery = (query) => {
-    this.setState({query: query})
+    this.setState({query: query});
+
+    if (query) {
+      this.search
+    }
   }
 
   clearQuery = () => {
@@ -18,7 +23,6 @@ class SearchBooks extends React.Component {
   }
 
   render() {
-    console.log(this.state.query)
     return (
       <div className="search-books">
         <div className="search-books-bar">
@@ -32,6 +36,7 @@ class SearchBooks extends React.Component {
               However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
               you don't find a specific author or title. Every search is limited by search terms.
             */}
+
             <input
             type="text"
             placeholder="Search by title or author"
@@ -43,9 +48,44 @@ class SearchBooks extends React.Component {
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-
-          Search results here
-
+            {JSON.stringify(this.state.query)}
+            {this.state.books.map(book =>
+              <li key={book.id} className="book">
+                <div className="book-top">
+                  <div
+                    className="book-cover"
+                    style={{
+                      width: 128,
+                      height: 193,
+                      backgroundImage: "url(" + book.imageLinks.thumbnail + ")"
+                    }}
+                  />
+                  <div className="book-shelf-changer">
+                    <select
+                      value={book.shelf}
+                      onChange={e => {
+                        this.updateBookOnSearch(book, e.target.value);
+                      }}
+                    >
+                      <option value="none" disabled>
+                        Move to...
+                      </option>
+                      <option value="currentlyReading">Currently Reading</option>
+                      <option value="wantToRead">Want to Read</option>
+                      <option value="read">Read</option>
+                      <option value="none">None</option>
+                    </select>
+                  </div>
+                </div>
+                <div className="book-title">
+                  {book.title}
+                </div>
+                {book.authors &&
+                  <div className="book-authors">
+                    {book.authors[0]}
+                  </div>}
+              </li>
+            )}
           </ol>
         </div>
       </div>

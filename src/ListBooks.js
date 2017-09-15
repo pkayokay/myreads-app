@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import * as BooksAPI from "./BooksAPI";
 
 class ListBooks extends React.Component {
-  state = {};
+  state = {}
 
   handleChange = (bookId: string, e: any) => {
     let temp = this.props.books;
@@ -14,9 +14,9 @@ class ListBooks extends React.Component {
     BooksAPI.update(book, e.target.value).then(response => {
       this.setState({
         books: temp
-      });
-    });
-  };
+      })
+    })
+  }
 
   render() {
     return (
