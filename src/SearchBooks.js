@@ -10,9 +10,10 @@ class SearchBooks extends React.Component {
     books: []
   }
 
+// Query is passed in order to update books on the page
   updateQuery = (query) => {
     this.setState({query: query});
-     BooksAPI.search(query, 20).then(data => {
+     BooksAPI.search(query).then(data => {
       this.updateBooks(data)
     })
   }
@@ -32,6 +33,7 @@ class SearchBooks extends React.Component {
     })
   }
 
+// Updates State of books on search page
   updateBookOnSearch(book, shelf) {
     let tempBooks = this.state.books;
     const bookUpdate = tempBooks.filter(n => n.id === book.id)[0];
