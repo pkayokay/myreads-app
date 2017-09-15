@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 import * as BooksAPI from './BooksAPI'
-import './App.css'
 
 class SearchBooks extends React.Component {
 
@@ -12,14 +12,34 @@ class SearchBooks extends React.Component {
 
   updateQuery = (query) => {
     this.setState({query: query});
-
-    if (query) {
-      this.search
-    }
+     BooksAPI.search(query, 20).then(data => {
+      this.updateBooks(data)
+    })
   }
 
-  clearQuery = () => {
-    this.setState({query: ''})
+  updateBooks(books) {
+    const handledBooks = books.map(book => {
+      book.shelf = 'none';
+      this.props.books.forEach(bookOnShelf => {
+        if (book.id === bookOnShelf.id) {
+          book.shelf = bookOnShelf.shelf;
+        }
+      });
+      return book;
+    })
+    this.setState({
+      books: handledBooks
+    })
+  }
+
+  updateBookOnSearch(book, shelf) {
+    let tempBooks = this.state.books;
+    const bookUpdate = tempBooks.filter(n => n.id === book.id)[0];
+    bookUpdate.shelf = shelf;
+    this.setState({
+      books: tempBooks
+    });
+    this.props.onChangeShelf(book, shelf);
   }
 
   render() {
@@ -48,9 +68,8 @@ class SearchBooks extends React.Component {
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-            {JSON.stringify(this.state.query)}
             {this.state.books.map(book =>
-              <li key={book.id} className="book">
+              <li key={book.id} className="book" style={{ width: 162 }}>
                 <div className="book-top">
                   <div
                     className="book-cover"
@@ -91,6 +110,11 @@ class SearchBooks extends React.Component {
       </div>
     )
   }
+}
+
+SearchBooks.propTypes = {
+  books: PropTypes.array,
+  onChangeShelf: PropTypes.func
 }
 
 export default SearchBooks
