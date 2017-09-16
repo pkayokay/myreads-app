@@ -14,24 +14,33 @@ class SearchBooks extends React.Component {
   updateQuery = (query) => {
     this.setState({query: query});
      BooksAPI.search(query).then(data => {
-      this.updateBooks(data)
+      const handledBooks = data.map(book => {
+        book.shelf = 'none';
+        this.props.books.forEach(bookOnShelf => {
+          if (book.id === bookOnShelf.id) {
+            book.shelf = bookOnShelf.shelf;
+          }
+        });
+        return book;
+      })
+      this.setState({
+        books: handledBooks
+      })
     })
   }
 
-  updateBooks(books) {
-    const handledBooks = books.map(book => {
-      book.shelf = 'none';
-      this.props.books.forEach(bookOnShelf => {
-        if (book.id === bookOnShelf.id) {
-          book.shelf = bookOnShelf.shelf;
-        }
-      });
-      return book;
-    })
-    this.setState({
-      books: handledBooks
-    })
-  }
+ // updateQuery=(query)=>{
+ //    this.setState({
+ //      query:query.target.value
+ //    })
+ //    this.props.search(this.state.query,40)
+
+ //    BooksAPI.search(query).then(results=>{
+ //      this.setState({
+ //        results:results
+ //      })
+ //    })
+ //  }
 
 // Updates State of books on search page
   updateBookOnSearch(book, shelf) {
@@ -88,7 +97,7 @@ class SearchBooks extends React.Component {
                         this.updateBookOnSearch(book, e.target.value);
                       }}
                     >
-                      <option value="none" disabled>
+                      <option disabled>
                         Move to...
                       </option>
                       <option value="currentlyReading">Currently Reading</option>
