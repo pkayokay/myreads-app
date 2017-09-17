@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { Throttle } from 'react-throttle'
 import PropTypes from 'prop-types'
 import * as BooksAPI from './BooksAPI'
 
@@ -10,7 +11,6 @@ class SearchBooks extends React.Component {
     books: []
   }
 
-// Query is passed in order to update books on the page
   updateQuery = (query) => {
     this.setState({query: query});
      BooksAPI.search(query).then(data => {
@@ -37,10 +37,6 @@ class SearchBooks extends React.Component {
     })
   }
 
-// url(" + book.imageLinks.thumbnail + ")
-
-
-// Updates State of books on search page
   updateBookOnSearch(book, shelf) {
     let tempBooks = this.state.books;
     const bookUpdate = tempBooks.filter(n => n.id === book.id)[0];
@@ -57,12 +53,14 @@ class SearchBooks extends React.Component {
         <div className="search-books-bar">
           <Link to="/" className="close-search">Close</Link>
           <div className="search-books-input-wrapper">
-            <input
-            type="text"
-            placeholder="Search by title or author"
-            value={this.state.query}
-            onChange={(event) => this.updateQuery(event.target.value)}
-            />
+            <Throttle time="200" handler="onChange">
+              <input
+              type="text"
+              placeholder="Search by title or author"
+              value={this.state.query}
+              onChange={(event) => this.updateQuery(event.target.value)}
+              />
+            </Throttle>
           </div>
         </div>
         <div className="search-books-results">
