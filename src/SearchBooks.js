@@ -53,7 +53,7 @@ class SearchBooks extends React.Component {
         <div className="search-books-bar">
           <Link to="/" className="close-search">Close</Link>
           <div className="search-books-input-wrapper">
-            <Throttle time="200" handler="onChange">
+            <Throttle time="400" handler="onChange">
               <input
               type="text"
               placeholder="Search by title or author"
