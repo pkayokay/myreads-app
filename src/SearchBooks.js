@@ -21,10 +21,7 @@ class SearchBooks extends React.Component {
   }
 
   callSearchAPI = () => {
-    console.log('debounce')
-
-     BooksAPI.search(this.state.query).then(data => {
-
+    BooksAPI.search(this.state.query).then(data => {
      if (Array.isArray(data)) {
       const handledBooks = data.map(book => {
         book.shelf = 'none';
