@@ -1,22 +1,31 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Throttle } from 'react-throttle'
 import PropTypes from 'prop-types'
+import debounce from 'lodash.debounce'
 import * as BooksAPI from './BooksAPI'
 
 class SearchBooks extends React.Component {
-
   state = {
     query: '',
     books: []
   }
 
-  updateQuery = (query) => {
-    this.setState({query: query});
-     BooksAPI.search(query).then(data => {
+  constructor(props){
+    super(props);
+    this.search = debounce(this.callSearchAPI, 400)
+  }
+
+  updateQuery = (event) => {
+    this.setState({query: event.target.value});
+    this.search()
+  }
+
+  callSearchAPI = () => {
+    console.log('debounce')
+
+     BooksAPI.search(this.state.query).then(data => {
 
      if (Array.isArray(data)) {
-      console.log(Array.isArray(data));
       const handledBooks = data.map(book => {
         book.shelf = 'none';
         this.props.books.forEach(bookOnShelf => {
@@ -53,14 +62,12 @@ class SearchBooks extends React.Component {
         <div className="search-books-bar">
           <Link to="/" className="close-search">Close</Link>
           <div className="search-books-input-wrapper">
-            <Throttle time="400" handler="onChange">
               <input
               type="text"
               placeholder="Search by title or author"
               value={this.state.query}
-              onChange={(event) => this.updateQuery(event.target.value)}
+              onChange={(event) => this.updateQuery(event)}
               />
-            </Throttle>
           </div>
         </div>
         <div className="search-books-results">
