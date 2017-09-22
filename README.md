@@ -3,7 +3,7 @@ MyReads is a bookshelf app that allows you to select and categorize books you ha
 
 ## Installation
 
-1. Copy the repository ([download](http://github.com/pkayokay/udacity-myreads-pkayokay/archive/master.zip) or [clone](https://github.com/pkayokay/udacity-myreads-pkayokay.git))
+1. Copy the repository ([download](http://github.com/pkayokay/myreads-app/archive/master.zip) or clone)
 2. Open terminal andd `cd` into the project's directory
 3. Run `npm install` for projecy dependencies
 4. Run `npm start` to launch the app on your browser
